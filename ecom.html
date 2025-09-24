@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Indian Heritage Products</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0 1rem;
+      background: #faf8f5;
+      color: #333;
+    }
+    header {
+      background: #a83232;
+      color: #fff;
+      padding: 1rem 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1.2px;
+    }
+    .search-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1rem auto;
+      max-width: 900px;
+    }
+    .search-section input {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: 2px solid #a83232;
+      border-radius: 5px;
+      flex: 1 1 300px;
+    }
+    .state-section {
+      margin: 2rem 0;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 1.5rem;
+    }
+    .state-section h2 {
+      color: #a83232;
+      margin-bottom: 0.5rem;
+      border-left: 5px solid #a83232;
+      padding-left: 0.75rem;
+    }
+    .products {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .products li {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      flex: 1 1 180px;
+      min-width: 180px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .products li:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      background: #f8d7da;
+      color: #a83232;
+    }
+    .product-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+    .product-name {
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+      text-align: center;
+    }
+    .product-description {
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .product-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      text-decoration: none;
+      background: #a83232;
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: background 0.2s ease;
+    }
+    .product-link:hover {
+      background: #7a201f;
+    }
+    @media (max-width: 600px) {
+      .products li {
+        flex: 1 1 100%;
+      }
+      .search-section {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>Indian Heritage Products - Explore by State</header>
+  <div class="search-section">
+    <input type="text" id="stateSearch" placeholder="Search by State (e.g. Goa)" />
+    <input type="text" id="productSearch" placeholder="Search by Product (e.g. Sarees, Crafts)" />
+  </div>
+  <main id="productContainer">
+    <!-- States and products are injected by JS below -->
+  </main>
+  <script>
+    // Data
+    const data = {
+      "Andhra Pradesh": [
+        {
+          name: "Pochampally Sarees",
+          description: "Traditional saree with geometric ikat designs from Telangana.",
+          image: "https://imgs.search.brave.com/_DTug2NZfGsPE0VqiMp4Jeim13PMuQlQzY4HA9NjbAQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zaGls/cGF3ZWF2ZXMuY29t/L2Nkbi9zaG9wL3By/b2R1Y3RzL3BvY2hh/bXBhbGx5X3NhcmVl/c18xMF8zM2VkODFh/OS01NDMzLTRmYWMt/OGQ3NS1jMjZmMzU1/Yzc2ZTQuanBnP3Y9/MTcwMzIyNzEzOCZ3/aWR0aD01MzM",
+          link: "https://itokri.com/collections/pochampally-sarees"
+        },
+        {
+          name: "Kalamkari Art",
+          description: "Hand-painted cotton textile with natural dyes showcasing traditional motifs.",
+          image: "https://imgs.search.brave.com/sthP7RG8Wdd1MHtnjs5dHKvKcAX9fSK0tCKD-0h9Efg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLmV0/c3lzdGF0aWMuY29t/LzE4OTYxNDg5L2Mv/MTA2MC8xMDYwLzAv/MC9pbC8xOTYyNDQv/MjY3ODY3OTg3OS9p/bF82MDB4NjAwLjI2/Nzg2Nzk4NzlfNnVs/cC5qcGc",
+          link: "https://metalkart.in/pages/discover-the-exquisite-beauty-of-kalamkari-paintings"
+        },
+        {
+          name: "Etikoppaka Toys",
+          description: "Handcrafted wooden toys painted with natural dyes from Etikoppaka village.",
+          image: "https://imgs.search.brave.com/lv-tEbywuuVqEgA-E_E0Bzh4O2xnoDpc3--Xfc2xYrQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/d2VkdHJlZS5jb20v/Y2RuL3Nob3AvZmls/ZXMvZXRpa29wcGFr/YS10b3lzLW11c2lj/aWFucy1zZXQtb2Yt/My13bDM4MjAtd29v/ZGVuLWRlY29yLTMz/OS5qcGc_Y3JvcD1j/ZW50ZXImaGVpZ2h0/PTgwNyZ2PTE3Mjkz/MzQ5NTAmd2lkdGg9/NjQ1",
+          link: "https://itokri.com/collections/etikoppaka-toys"
+        },
+        {
+          name: "Lacquerware",
+          description: "Traditional craft involving coating wood or bamboo with lacquer paints.",
+          image: "https://imgs.search.brave.com/Si8DENwTfiljoMb-cxOPh9rB9ZgOGn7ywfDeGlS_t3I/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zN2Fw/MS5zY2VuZTcuY29t/L2lzL2ltYWdlL2lu/Y3JlZGlibGVpbmRp/YS9hbmRocmEtcHJh/ZGVzaC1sZWF0aGVy/LXB1cHBldHJ5LTEt/Y3JhZnQtcG9wdWxh/cj9xbHQ9ODImdHM9/MTcyNjY0MTQ0MzQx/Mg",
+          link: "https://en.wikipedia.org/wiki/Lacquerware"
+        }
+      ],
+      "Goa": [
+        {
+          name: "Cashew Crafts",
+          description: "Crafts made using cashew shells and nuts from Goa.",
+          image: "https://imgs.search.brave.com/37Iuw0PUZE4Ti8GsiYK0gUTfO00DmIMvg3H7BDsIu34/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2Nhc2hld3MuY29t/L2ltZy9waG8yLnBu/Zw",
+          link: "#"
+        },
+        {
+          name: "Azulejo Tiles",
+          description: "Decorative ceramic tiles crafted with Portuguese influence.",
+          image: "https://imgs.search.brave.com/u_N_ilYE8erap6fJQ5M7699tHC6MLRs-3fnwpMxmv54/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTgz/NTg0MTU0L3Bob3Rv/L29sZC1saXNib24t/dGlsZXMtYXp1bGVq/b3MuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPWRUdjU5eXpY/ckcwMEFHZnZjYUF5/aGdYa1pKVGhEdGJF/WDdSOXlTRlJRWU09",
+          link: "#"
+        },
+        {
+          name: "Cane Furniture",
+          description: "Eco-friendly cane furniture handcrafted by Goan artisans.",
+          image: "https://imgs.search.brave.com/P3jWV7L4nIdAyu8qF3ggPv-9NwjuZvdE6VYNiL96TDI/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmpkbWFnaWNi/b3guY29tL2NvbXAv/Z29hL3UxLzA4MzJw/eDgzMi54ODMyLjE3/MDUwMTE1MDEwMy5p/NHUxL2NhdGFsb2d1/ZS9nb2EtY2FuZS13/b3JsZC1wb3J2b3Jp/bS1nb2EtY2FuZS1m/dXJuaXR1cmUtZGVh/bGVycy1temNwdS5q/cGVnP3c9NjQwJnE9/NzU",
+          link: "#"
+        },
+        {
+          name: "Sea Shell Crafts",
+          description: "Art and decorative items made from sea shells found on Goan beaches.",
+          image: "https://imgs.search.brave.com/yW-tRo9MaL-_OSwnRyqy7F2mPguhKcVByGDMOfYcWVo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9oaW5k/aWtyYWZ0cy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjAv/MDkvMTEuanBn",
+          link: "#"
+        }
+      ],
+      "Kerala": [
+        {
+          name: "Cashew Crafts",
+          description: "Crafts made using cashew shells and nuts from Goa.",
+          image: "https://imgs.search.brave.com/37Iuw0PUZE4Ti8GsiYK0gUTfO00DmIMvg3H7BDsIu34/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2Nhc2hld3MuY29t/L2ltZy9waG8yLnBu/Zw",
+          link: "#"
+        },
+        {
+          name: "Azulejo Tiles",
+          description: "Decorative ceramic tiles crafted with Portuguese influence.",
+          image: "https://imgs.search.brave.com/u_N_ilYE8erap6fJQ5M7699tHC6MLRs-3fnwpMxmv54/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTgz/NTg0MTU0L3Bob3Rv/L29sZC1saXNib24t/dGlsZXMtYXp1bGVq/b3MuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPWRUdjU5eXpY/ckcwMEFHZnZjYUF5/aGdYa1pKVGhEdGJF/WDdSOXlTRlJRWU09",
+          link: "#"
+        },
+        {
+          name: "Cane Furniture",
+          description: "Eco-friendly cane furniture handcrafted by Goan artisans.",
+          image: "https://imgs.search.brave.com/P3jWV7L4nIdAyu8qF3ggPv-9NwjuZvdE6VYNiL96TDI/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmpkbWFnaWNi/b3guY29tL2NvbXAv/Z29hL3UxLzA4MzJw/eDgzMi54ODMyLjE3/MDUwMTE1MDEwMy5p/NHUxL2NhdGFsb2d1/ZS9nb2EtY2FuZS13/b3JsZC1wb3J2b3Jp/bS1nb2EtY2FuZS1m/dXJuaXR1cmUtZGVh/bGVycy1temNwdS5q/cGVnP3c9NjQwJnE9/NzU",
+          link: "#"
+        },
+        {
+          name: "Sea Shell Crafts",
+          description: "Art and decorative items made from sea shells found on Goan beaches.",
+          image: "https://imgs.search.brave.com/yW-tRo9MaL-_OSwnRyqy7F2mPguhKcVByGDMOfYcWVo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9oaW5k/aWtyYWZ0cy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjAv/MDkvMTEuanBn",
+          link: "#"
+        }
+      ],
+      // Add more states and products as needed
+    };
+
+    // Render all states and products at once
+    function renderAll() {
+      const container = document.getElementById('productContainer');
+      container.innerHTML = '';
+      Object.entries(data).forEach(([state, products]) => {
+        const section = document.createElement('section');
+        section.className = 'state-section';
+        section.dataset.state = state;
+        section.innerHTML = `
+          <h2>${state}</h2>
+          <ul class="products"></ul>
+        `;
+        const productsUl = section.querySelector('.products');
+        products.forEach(product => {
+          const li = document.createElement('li');
+          li.dataset.product = product.name;
+          li.innerHTML = `
+            <img class="product-image" src="${product.image}" alt="${product.name}" />
+            <div class="product-name">${product.name}</div>
+            <div class="product-description">${product.description}</div>
+            <a class="product-link" href="${product.link}" target="_blank" rel="noopener noreferrer">More Info</a>
+          `;
+          productsUl.appendChild(li);
+        });
+        container.appendChild(section);
+      });
+      // Now, immediately filter (to handle any existing search text)
+      filterProducts();
+    }
+
+    // Search/filter logic
+    function filterProducts() {
+      const stateFilter = document.getElementById('stateSearch').value.toLowerCase().trim();
+      const productFilter = document.getElementById('productSearch').value.toLowerCase().trim();
+      const states = document.querySelectorAll('section.state-section');
+      states.forEach(state => {
+        const stateName = state.getAttribute('data-state').toLowerCase();
+        const productItems = state.querySelectorAll('ul.products li');
+        // Check if the state matches the filter (if empty, match all)
+        const stateMatches = !stateFilter || stateName.includes(stateFilter);
+        let anyProductMatches = false;
+        productItems.forEach(product => {
+          const productName = product.getAttribute('data-product').toLowerCase();
+          // Product matches if filter empty or included
+          const productMatches = !productFilter || productName.includes(productFilter);
+          if (productMatches) {
+            product.style.display = '';
+            anyProductMatches = true;
+          } else {
+            product.style.display = 'none';
+          }
+        });
+        // Show section if both state and at least one product matches
+        if (stateMatches && anyProductMatches) {
+          state.style.display = '';
+        } else {
+          state.style.display = 'none';
+        }
+      });
+    }
+
+    // Event listeners for live search
+    document.getElementById('stateSearch').addEventListener('input', filterProducts);
+    document.getElementById('productSearch').addEventListener('input', filterProducts);
+
+    // Initial render
+    renderAll();
+  </script>
+</body>
+</html>
